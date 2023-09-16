@@ -1,0 +1,62 @@
+    
+   
+    
+    .container{
+        display: flex;
+        flex-direction: column;
+        background-color:   black;
+    }
+     
+    .nav{
+        display: flex;   
+        justify-content: space-between;
+        background-color: rgb(36, 30, 30); 
+    }
+    .nav fieldset{
+        display: flex;
+    }
+    .leftpart{
+        display: flex;
+        align-items: baseline;
+        column-gap: 30px; 
+    } 
+    .leftpart h1{  
+        font-weight: bold;
+        font-size: 20px;
+        padding: 10px;
+        background-color: rgb(202, 202, 66); 
+        border-radius: 10%;
+    }
+    .rightpart{
+        display: flex; 
+        column-gap: 50px;
+        margin-top: 10px;  
+    }
+    .release-date{ 
+        font-size: 20px;  
+
+    }
+    .radio fieldset{ 
+        border: 0;
+        column-gap: 20px; 
+    }
+    .radio {  
+        display: flex;
+        align-items: baseline;
+        column-gap: 10px;
+        color: antiquewhite; 
+        font-size: 80%;
+    }
+    .type{ 
+        color: antiquewhite;  
+        display: flex;
+        align-items: baseline;
+        column-gap: 10px;
+        font-size: 90%;
+    }
+    .type fieldset{
+        border: 0;
+        column-gap: 20px;
+    }
+
+    
