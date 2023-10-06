@@ -17,6 +17,8 @@ const Home = () => {
     const [typeFlag1,setTypeFlag1] = useState<Boolean>(false);
     const [typeFlag2,setTypeFlag2] = useState<Boolean>(false);
     const [recommendationsFlag, setRecommendationsFlag] = useState(true);
+    const [isLoading,setIsLoading] =useState(true);
+
 
 
     //TYPE
@@ -98,6 +100,7 @@ const Home = () => {
         else if(event.target.value.length ==0 ){
             setRecommendationsFlag(true);
             setSk('bla');
+            setType('movie');
         }
 
     }
@@ -122,6 +125,9 @@ const Home = () => {
             if(json.Search) { 
                 setGames(json.Search);  
             }  
+            setTimeout(() => {
+                 setIsLoading(false);
+            }, 1000);
           
     }
     
@@ -136,33 +142,35 @@ const Home = () => {
             
             <Navbar handleDec = {handleDec} handleInc={handleInc} handleAlphabetDec={handleAlphabetDec} handleAlphabetInc={handleAlphabetInc} 
             handleFetchMovies ={handleFetchMovies} handleFetchSeries={handleFetchSeries} handleFetchGames={handleFetchGames} handleSearch={handleSearch}/> 
-            {sk=='' && <NotFound />}
+         
+            {sk=='' ? <NotFound /> 
+            :
+                isLoading ? <div className="text-white bg-black bg-gradient vh-100 text-center fs-1 pt-5">Loading...</div>
+                :
+                        recommendationsFlag ? (
+                            <div className="MOVIES AND SERIES SLIDERS text-white bg-black bg-gradient">
+                                <div className="d-flex flex-column align-items-center p-5 MOVIES">
 
+                                    <h1 className="border-bottom p-2 m-4 mb-5 w-50 text-center text-white border-3 rounded-bottom    ">Movies</h1>
+                                    <Slider movies={movies} />
 
-            {recommendationsFlag ? (
-                <div className="MOVIES AND SERIES SLIDERS text-white bg-black bg-gradient">
-                    <div className="d-flex flex-column align-items-center p-5 MOVIES">
+                                    <h1 className="border-bottom p-2 m-4 mb-5 mt-5 pt-5 w-50 text-center border-3 rounded-bottom " >Series</h1>
+                                    <Slider  movies={series} />
 
-                        <h1 className="border-bottom p-2 m-4 mb-5 w-50 text-center text-white border-3 rounded-bottom    ">Movies</h1>
-                        <Slider movies={movies} />
+                                    <h1 className="border-bottom p-2 m-4 mb-5 mt-5 pt-5 w-50 text-center border-3 rounded-bottom " >Games</h1>
+                                    <Slider movies={games} />
 
-                        <h1 className="border-bottom p-2 m-4 mb-5 mt-5 pt-5 w-50 text-center border-3 rounded-bottom " >Series</h1>
-                        <Slider  movies={series} />
-
-                        <h1 className="border-bottom p-2 m-4 mb-5 mt-5 pt-5 w-50 text-center border-3 rounded-bottom " >Games</h1>
-                        <Slider movies={games} />
-
-                    </div>   
-                     
-           
-                </div>
-             )
-            :   
-            ( 
-                <MovieList movies={movies} typeFlag1={typeFlag1} typeFlag2={typeFlag2} recommendationsFlag={recommendationsFlag}/> 
-            
-            )
-        }
+                                </div>   
+                                
+                    
+                            </div>
+                        )
+                        : 
+                        ( 
+                            <MovieList movies={movies} typeFlag1={typeFlag1} typeFlag2={typeFlag2} recommendationsFlag={recommendationsFlag}/> 
+                        
+                        )
+            }
              
             
         </div>
